@@ -21,4 +21,4 @@ jobs:
         password: ${{ secrets.ACR_PASSWORD }}
     - run: |
         az bicep build --file main.bicep
-        az bicep publish --file main.bicep --target br:${{ secrets.REGISTRY_LOGIN_SERVER }}/bicep/modules/networkprivatednszonesvirtualnetworklinks:${{ github.sha }}
+        az bicep publish --file main.bicep --target br:${{ secrets.ACR_LOGIN_SERVER }}/bicep/modules/networkprivatednszonesvirtualnetworklinks:${{ github.sha }}
