@@ -16,12 +16,12 @@ var pdnsz_app_id_parsed = {
 }
 
 @description('subnet ID to Enbable App Private Endpoints Connections')
-param snet_app_pe_id string
+param vnet_id string
 
 @description('Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled')
 param enable_pdnsz_autoregistration bool
 
-var pdnsz_vnet_link_n = '${pdnsz_app_id_parsed.res_n}/${take('${pdnsz_app_id_parsed.res_n}-link-${guid(subscription().id, resourceGroup().id, snet_app_pe_id)}', 80)}'
+var pdnsz_vnet_link_n = '${pdnsz_app_id_parsed.res_n}/${take('${pdnsz_app_id_parsed.res_n}-link-${guid(subscription().id, resourceGroup().id, vnet_id)}', 80)}'
 // ------------------------------------------------------------------------------------------------
 // Deploy Resource
 // ------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ resource vnLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-0
   properties: {
     registrationEnabled: enable_pdnsz_autoregistration
     virtualNetwork: {
-      id: snet_app_pe_id
+      id: vnet_id
     }
   }
   tags: tags

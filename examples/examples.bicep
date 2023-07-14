@@ -22,7 +22,7 @@ var subnets = [
 ]
 
 resource vnetApp 'Microsoft.Network/virtualNetworks@2021-02-01' = {
-  name: 'vnet-azure-bicep-app-service'
+  name: 'vnet-pdnsz-vnetlink'
   location: location
   tags: tags
   properties: {
@@ -51,7 +51,7 @@ resource pdnsz 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 module pdnszVnetLinkDeployment '../main.bicep'= {
   name: 'pdnszVnetLinkDeployment'
   params: {
-    snet_app_pe_id: vnetApp.properties.subnets[0].id
+    vnet_id: vnetApp.id
     enable_pdnsz_autoregistration: false
     pdnsz_app_id: pdnsz.id
     tags: tags
