@@ -10,7 +10,7 @@ var tags = {
 }
 
 // ------------------------------------------------------------------------------------------------
-// App Service Networking Configurations Examples
+// VNET Configurations Examples
 // ------------------------------------------------------------------------------------------------
 var subnets = [
   {
@@ -53,7 +53,7 @@ module pdnszVnetLinkDeployment '../main.bicep'= {
   params: {
     vnet_id: vnetApp.id
     enable_pdnsz_autoregistration: false
-    pdnsz_app_id: pdnsz.id
+    pdnsz_id: pdnsz.id
     tags: tags
   }
 }
