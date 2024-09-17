@@ -42,6 +42,9 @@ resource vnetApp 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   }
 }
 
+// ------------------------------------------------------------------------------------------------
+// PDNS VNET LINK WITHOUT AUTO REGISTRATION
+// ------------------------------------------------------------------------------------------------
 resource pdnsz 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: 'privatelink.azurewebsites.net'
   location: 'global'
@@ -53,6 +56,25 @@ module pdnszVnetLinkDeployment '../main.bicep'= {
   params: {
     vnet_id: vnetApp.id
     enable_pdnsz_autoregistration: false
+    pdnsz_id: pdnsz.id
+    tags: tags
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+// PDNS VNET LINK W AUTO REGISTRATION
+// ------------------------------------------------------------------------------------------------
+resource pdnszRedis 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+  name: 'privatelink.redis.cache.windows.net'
+  location: 'global'
+  tags: tags
+}
+
+module pdnszVnetLinkWAutoRegistration '../main.bicep'= {
+  name: 'pdnszVnetLinkWAutoRegistration'
+  params: {
+    vnet_id: vnetApp.id
+    enable_pdnsz_autoregistration: true
     pdnsz_id: pdnsz.id
     tags: tags
   }
