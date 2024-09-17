@@ -75,7 +75,7 @@ module pdnszVnetLinkWAutoRegistration '../main.bicep'= {
   params: {
     vnet_id: vnetApp.id
     enable_pdnsz_autoregistration: true
-    pdnsz_id: pdnsz.id
+    pdnsz_id: pdnszRedis.id
     tags: tags
   }
 }
