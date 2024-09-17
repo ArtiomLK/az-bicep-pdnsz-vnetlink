@@ -78,4 +78,7 @@ module pdnszVnetLinkWAutoRegistration '../main.bicep'= {
     pdnsz_id: pdnszRedis.id
     tags: tags
   }
+  dependsOn: [
+    pdnszVnetLinkDeployment
+  ]
 }
